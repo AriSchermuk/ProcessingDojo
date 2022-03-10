@@ -7,31 +7,22 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class Sketch extends PApplet {
-    private List<Drop> drops;
+    private List<ActableMovingObject> objects;
 
     @Override
     public void settings() {
-        size(600, 600);
+        //size(w, h); //Set size of the canvas
     }
 
     @Override
     public void setup() {
-        drops = new ArrayList<>();
-        for (int i = 0; i < 1000; i++) {
-            drops.add(new Drop(this));
-        }
+        objects = new ArrayList<>();
+        //Add objects to add
     }
 
     @Override
     public void draw() {
-        background(20,20,70);
-        drops.forEach(getDropConsumer());
-    }
-
-    private Consumer<Drop> getDropConsumer() {
-        return d -> {
-            d.move();
-            d.show();
-        };
+        //background(r, g, b); //Draw background on each iteration
+        objects.forEach(ActableMovingObject::act);
     }
 }
